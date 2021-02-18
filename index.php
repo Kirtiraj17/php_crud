@@ -29,10 +29,21 @@ include "init.php";
 			    // for admin: role_id = 1 - default
 			    // for user: role_id = 2
 
-			    if($functions->query("INSERT INTO users (fname, lname, email, password, role_id) VALUES (?,?,?,?,?)", [$validator->first_name, $validator->last_name, $validator->email, $password, '1'])) {
-				    $_SESSION['account_created'] = "Your account is successfully created!";
-				    header("location:login.php");
-		     	} else { echo "Error";}
+			    if (isset($_POST['check'])) {
+			    	
+				    if($functions->query("INSERT INTO users (fname, lname, email, password, role_id) VALUES (?,?,?,?,?)", [$validator->first_name, $validator->last_name, $validator->email, $password, '1'])) {
+					    $_SESSION['account_created'] = "Your account is successfully created!";
+					    header("location:login.php");
+			     	} else { echo "Error";}
+
+		     	} else {
+
+		     		if($functions->query("INSERT INTO users (fname, lname, email, password, role_id) VALUES (?,?,?,?,?)", [$validator->first_name, $validator->last_name, $validator->email, $password, '2'])) {
+					    $_SESSION['account_created'] = "Your account is successfully created!";
+					    header("location:login.php");
+			     	} else { echo "Error";}
+
+		     	}
 
 		    }
 
@@ -82,6 +93,9 @@ include "init.php";
 	          <?php echo $validator->cpassword_error; ?>
 	        <?php endif; ?>
 		</span>
+		<br><br>
+
+		<input type="checkbox" name="check">Check here to registered as an Admin
 		<br><br>
 
 		<input type="submit" name="submit" value="Submit"> 
