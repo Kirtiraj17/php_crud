@@ -26,10 +26,13 @@ include "init.php";
 
 			    $password = password_hash($validator->password, PASSWORD_DEFAULT);
 
-			    if($functions->query("INSERT INTO users (fname,lname,email,password) VALUES (?,?,?,?)", [$validator->first_name, $validator->last_name, $validator->email, $password])) {
+			    // for admin: role_id = 1 - default
+			    // for user: role_id = 2
+
+			    if($functions->query("INSERT INTO users (fname, lname, email, password, role_id) VALUES (?,?,?,?,?)", [$validator->first_name, $validator->last_name, $validator->email, $password, '1'])) {
 				    $_SESSION['account_created'] = "Your account is successfully created!";
 				    header("location:login.php");
-		     	}
+		     	} else { echo "Error";}
 
 		    }
 
