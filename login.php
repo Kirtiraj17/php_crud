@@ -1,6 +1,9 @@
 <?php
 include "init.php";
 
+if(isset($_SESSION['id'])) {
+	header("Location: home.php");
+}
 
 if(isset($_POST['login'])) {
 
