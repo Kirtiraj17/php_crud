@@ -30,6 +30,8 @@ if(isset($_POST['login'])) {
 		  	if($functions->countRows() > 0) {
 		      	$row = $functions->single();
 		      	$id = $row->id;
+		      	$email = $row->email;
+		      	$role_id = $row->role_id;
 		      	$db_password = $row->password;
 		      	$fname = $row->fname;
 		      	// var_dump($row);
@@ -41,8 +43,10 @@ if(isset($_POST['login'])) {
 						setcookie('pass', $data['password'], time()+86400);
 					}
 
-		      		$_SESSION['login_success'] = "Hi ".$fname . " You are successfully Logged In!";
+		      		$_SESSION['login_success'] = "Hi ".$fname . " You are successfully Logged In!<br>";
 				    $_SESSION['id'] = $id;
+				    $_SESSION['email'] = $email;
+				    $_SESSION['role_id'] = $role_id;
 				    header("Location: home.php");
 		      	} else {
 		      		$data['password_error'] = "Please enter correct password";
