@@ -26,7 +26,7 @@ class Functions extends Db
 
 	// fetch all data from tables
 	public function fetchAll() {
-		return $this->query->fetchAll(PDO::FETCH_OBJ);
+		return $this->query->fetchAll(PDO::FETCH_ASSOC);
 	}
 
     // fetch single row from specific table

@@ -16,7 +16,6 @@ if(!isset($_SESSION['id'])) {
      </style>
  </head>
  <body>
-     <div>
          <?php if(isset($_SESSION['login_success'])): ?>
             <div class="success">
                 <?php echo $_SESSION['login_success']; ?>
@@ -24,8 +23,66 @@ if(!isset($_SESSION['id'])) {
          <?php endif; ?>
          <?php unset($_SESSION['login_success']); ?>
 
-         <h2>Welcome to the dashboard</h2><hr>
+     <div>
+         <h2>Welcome to the dashboard</h2>
          <a href="logout.php">logout</a>
+         <hr>
      </div>
+
+     <!-- fetched records from table -->
+     <div id="container">
+        <h2>Registered Users</h2>
+
+        <?php
+
+            $result = $functions->query("SELECT * FROM users");
+
+            if($result) {
+                if ($functions->countRows() > 0) {
+
+        ?>
+
+        <table cellpadding="8px">
+            <thead>
+                <th>Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Update/Delete</th>
+            </thead>
+            <tbody>
+                <?php 
+                    //loop through records - fetch records
+                    $rows = $functions->fetchAll();
+
+                    $i = -1;
+                    foreach ($rows as $row) {
+                        $i++;
+                    
+                ?>
+                <tr>
+                    <td><?php echo $rows[$i]['id'] ?></td>
+                    <td><?php echo $rows[$i]['fname'] ?></td>
+                    <td><?php echo $rows[$i]['lname'] ?></td>
+                    <td><?php echo $rows[$i]['email'] ?></td>
+                    <td>
+                        <a href="update_form.php?id=<?php echo $rows[$i]['id'] ?>">Update</a>
+                        <a href="delete.php?id=<?php echo $rows[$i]['id'] ?>">Delete</a>
+                    </td>
+                </tr>
+                <?php 
+                            }
+                        } else {
+                            echo "<h2>No Record Found!<?h2>";
+                        }
+                    }
+                 ?>
+            </tbody>
+        </table>
+
+    </div>
+
+
+
  </body>
  </html>
