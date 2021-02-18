@@ -12,6 +12,16 @@ class Validator
 		return $data;
 	}
 
+	public function validateForm() {
+
+		$this->validateFirstName($_POST['fname']);
+		$this->validateLastName($_POST['lname']);
+		$this->validateEmail($_POST['email']);
+		$this->validatePassword($_POST['password']);
+		$this->validateCPassword($_POST['cpassword'], $_POST['password']);
+
+	}
+
 	public $first_name;
 	public $last_name;
 	public $email;
