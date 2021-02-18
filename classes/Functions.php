@@ -19,4 +19,19 @@ class Functions extends Db
 		}
 	}
 
+	// count no. of fetched rows
+	public function countRows() {
+		return $this->query->rowCount();
+	}
+
+	// fetch all data from tables
+	public function fetchAll() {
+		return $this->query->fetchAll(PDO::FETCH_OBJ);
+	}
+
+    // fetch single row from specific table
+    public function single(){
+        return $this->query->fetch(PDO::FETCH_OBJ);
+    }
+
 }
