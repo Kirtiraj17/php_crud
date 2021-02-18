@@ -16,22 +16,22 @@ if(!isset($_SESSION['id'])) {
      </style>
  </head>
  <body>
-         <?php if(isset($_SESSION['login_success'])): ?>
+        <?php if(isset($_SESSION['login_success'])): ?>
             <div class="success">
                 <?php 
-                    echo $_SESSION['login_success']; 
-
-                    // check if user is admin or user and echo
-                    if ($_SESSION['role_id'] == '1') {
-                        echo "You are an ADMIN!"; 
-                    } else {
-                        echo "You are an USER!";
-                    }
+                    echo $_SESSION['login_success'];
                 ?>
-
             </div>
-         <?php endif; ?>
-         <?php unset($_SESSION['login_success']); ?>
+        <?php endif; ?>
+        <?php unset($_SESSION['login_success']); ?>
+        <?php            
+            // check if user is admin or user and echo
+            if ($_SESSION['role_id'] == '1') {
+                echo "You are an ADMIN!"; 
+            } else {
+                echo "You are an USER!";
+            }
+        ?>
 
      <div>
          <h2>Welcome to the dashboard</h2>
