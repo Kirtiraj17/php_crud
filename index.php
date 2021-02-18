@@ -10,6 +10,25 @@
 
 	<?php
 
+		if(isset($_POST['submit'])) {
+
+			// call validator
+			$validator->validateForm();
+
+		    // Submit the form
+		    if(empty($validator->fname_error) && empty($validator->lname_error) && empty($validator->email_error) && empty($validator->password_error) && empty($validator->cpassword_error)) {
+
+			    $password = password_hash($validator->password, PASSWORD_DEFAULT);
+
+			    if($functions->query("INSERT INTO users (fname,lname,email,password) VALUES (?,?,?,?)", [$validator->first_name, $validator->last_name, $validator->email, $password])) {
+				    $_SESSION['account_created'] = "Your account is successfully created!";
+				    header("location:login.php");
+		     	}
+
+		    }
+
+		}
+
 	?>
 
 	<h2>Registration Form</h2>
