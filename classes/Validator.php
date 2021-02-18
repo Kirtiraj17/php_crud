@@ -14,6 +14,10 @@ class Validator
 
 	public $first_name;
 	public $last_name;
+	public $email;
+	public $fname_error='';
+	public $lname_error='';
+	public $email_error='';
 
 	// validate first name
 	public function validateFirstName($first_name) {
@@ -42,6 +46,30 @@ class Validator
 			if(!preg_match("/^[a-zA-Z-' ]*$/", $this->last_name)) {
 				$this->lname_error = "Invalid Last name!";
 			}
+		}
+	}
+
+	// validate email
+	public function validateEmail($email) {
+
+		$this->email = $this->test_input($email);
+
+		if(empty($this->email)) {
+			$this->email_error = "Email is required!";
+		} else {
+			//check for valid email
+			if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+				$this->email_error = "Invalid Email!"; 
+			}
+
+			$functions = new Functions();
+
+			//check if email already exists
+		    if($functions->query("SELECT * FROM users WHERE email = ?", [$this->email])) {
+		    	if($functions->countRows() > 0) {
+		    		$this->email_error = "Sorry Email already exist!";
+		      	}
+		    }
 		}
 	}
 
