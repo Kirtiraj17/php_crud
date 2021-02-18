@@ -43,6 +43,7 @@ if(isset($_POST['login'])) {
 						setcookie('pass', $data['password'], time()+86400);
 					}
 
+					// set session for the logged in user
 		      		$_SESSION['login_success'] = "Hi ".$fname . " You are successfully Logged In!<br>";
 				    $_SESSION['id'] = $id;
 				    $_SESSION['email'] = $email;
