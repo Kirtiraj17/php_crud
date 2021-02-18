@@ -7,5 +7,7 @@ spl_autoload_register(function($class_name) {
 });
 
 $functions = new Functions();
+$validator = new Validator();
+
 
 ?>
