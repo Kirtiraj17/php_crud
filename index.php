@@ -1,3 +1,9 @@
+<?php
+include "init.php";
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,33 +41,43 @@
 
 	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
-		First Name: <input type="text" name="fname" value="">
+		First Name: <input type="text" name="fname" value="<?php if(!empty($validator->first_name)): echo $validator->first_name; endif;?>">
 		<span class="error">* 
-		  	
+		  	<?php if($validator->fname_error): ?>
+	          <?php echo $validator->fname_error; ?>
+	        <?php endif; ?>
 	    </span>
 		<br><br>
 
-		Last Name: <input type="text" name="lname" value="">
+		Last Name: <input type="text" name="lname" value="<?php if(!empty($validator->last_name)): echo $validator->last_name; endif;?>">
 		<span class="error">* 
-		  	
+		  	<?php if($validator->lname_error): ?>
+	          <?php echo $validator->lname_error; ?>
+	        <?php endif; ?>
 		</span>
 		<br><br>
 
-		E-mail: <input type="text" name="email" value="">
+		E-mail: <input type="text" name="email" value="<?php if(!empty($validator->email)): echo $validator->email; endif;?>">
 		<span class="error">* 
-		
-		</span>
+			<?php if(!empty($validator->email_error)): ?>
+	          <?php echo $validator->email_error; ?>
+	        <?php endif; ?>		
+	    </span>
 		<br><br>
 
 		Password: <input type="password" name="password">
 		<span class="error">* 
-		  	
+		  	<?php if(!empty($validator->password_error)): ?>
+	          <?php echo $validator->password_error; ?>
+	        <?php endif; ?>
 		</span>
 		<br><br>
 
 		Confirm Password: <input type="password" name="cpassword">
 		<span class="error">* 
-		  	
+		  	<?php if(!empty($validator->cpassword_error)): ?>
+	          <?php echo $validator->cpassword_error; ?>
+	        <?php endif; ?>
 		</span>
 		<br><br>
 
